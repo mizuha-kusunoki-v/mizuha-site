@@ -96,5 +96,14 @@
   </div>
 </div>
 
+<div class="fanart-card">
+  <a href="https://x.com/Mizuha_live/status/1992204937624006896?s=20" target="_blank" rel="noopener">
+    <img src="../img/fanart/008.jpg" alt="NAGISA様のファンアート">
+  </a>
+  <div class="fanart-meta">
+    <a href="https://x.com/Nagi_clip" target="_blank" rel="noopener">@Nagi_clip</a>
+  </div>
+</div>
+
 <!-- FANART_END -->
 </div>
