@@ -1,0 +1,74 @@
+site_name: 楠木瑞羽 Official Site
+site_description: Vtuber 楠木瑞羽のオフィシャルサイト
+site_author: 楠木瑞羽
+site_url: https://mizuha-kusunoki-v.github.io/mizuha-site/
+
+theme:
+  name: material
+  language: ja
+  palette:
+    - scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: ダークモードに切り替え
+    - scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: ライトモードに切り替え
+  logo: img/logo.png
+  favicon: img/logo.png
+  font:
+    text: Noto Sans JP
+    code: Roboto Mono
+  features:
+    - navigation.tabs
+    - navigation.top
+    - navigation.instant
+    - search.highlight
+    - content.code.copy
+
+nav:
+  - ホーム: index.md
+  - キャラクター画像: chara.md
+  - 配信スケジュール: schedule.md
+  - SNSリンク: links.md
+  - ファンアート & タグ: fanart.md
+  - Special Thanks: special_thanks.md
+
+markdown_extensions:
+  - attr_list          # { .md-button } などのクラス指定を有効化
+  - md_in_html         # <div markdown> 内でMarkdownを有効化
+  - pymdownx.emoji:    # :fontawesome-brands-youtube: などのアイコン
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - tables             # テーブル記法
+  - pymdownx.tabbed:        # === "タブ名" のタブ切り替え
+      alternate_style: true
+  - pymdownx.superfences    # grid cards の <div markdown> を正しく処理
+  - admonition              # !!! note などの注意ボックス
+
+extra_css:
+  - stylesheets/extra.css
+
+extra:
+  social:
+    - icon: fontawesome/brands/youtube
+      link: https://www.youtube.com/@楠木瑞羽
+      name: YouTube
+    - icon: fontawesome/brands/x-twitter
+      link: https://x.com/KPRKcolonel
+      name: X / 雑談アカウント
+    - icon: fontawesome/brands/x-twitter
+      link: https://x.com/Mizuha_live
+      name: X / 配信告知アカウント
+    - icon: fontawesome/brands/github
+      link: https://github.com/mizuha-kusunoki-v
+      name: GitHub
+
+plugins:
+  - search:
+      lang: ja
