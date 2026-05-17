@@ -5,6 +5,7 @@ site_url: https://mizuha-kusunoki-v.github.io/mizuha-site/
 
 theme:
   name: material
+  custom_dir: overrides
   language: ja
   palette:
     - scheme: default
@@ -59,6 +60,9 @@ extra_javascript:
   - javascripts/floating_sns.js
 
 extra:
+  analytics:
+    provider: google
+    property: G-J9NGMEMPHV
   social:
     - icon: fontawesome/brands/youtube
       link: https://www.youtube.com/@楠木瑞羽

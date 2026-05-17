@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+  {{ super() }}
+
+  {# ===== OGP / Twitter Card ===== #}
+  {% set ogp_image = config.site_url ~ "img/blazer_b.png" %}
+  {% set ogp_title = page.title ~ " | " ~ config.site_name if page.title else config.site_name %}
+  {% set ogp_desc  = config.site_description %}
+
+  <meta property="og:type"        content="website">
+  <meta property="og:site_name"   content="{{ config.site_name }}">
+  <meta property="og:title"       content="{{ ogp_title }}">
+  <meta property="og:description" content="{{ ogp_desc }}">
+  <meta property="og:image"       content="{{ ogp_image }}">
+  <meta property="og:url"         content="{{ page.canonical_url }}">
+  <meta property="og:locale"      content="ja_JP">
+
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@Mizuha_live">
+  <meta name="twitter:title"       content="{{ ogp_title }}">
+  <meta name="twitter:description" content="{{ ogp_desc }}">
+  <meta name="twitter:image"       content="{{ ogp_image }}">
+{% endblock %}
