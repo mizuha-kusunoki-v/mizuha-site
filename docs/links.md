@@ -1,4 +1,4 @@
-# SNS & リンク集
+# 各種リンク
 
 <div class="grid cards" markdown>
 
