@@ -71,7 +71,7 @@ def generate_card(filename: str, author: str, x_handle: str,
     index / total は複数枚時のラベル用（0 なら非表示）。
     """
     if filename:
-        img_src = f"img/fanart/{filename}"
+        img_src = f"../img/fanart/{filename}"
     else:
         color   = "5BB8D4"
         label   = f"{author}様" + (f" ({index}/{total})" if total > 1 else "")
