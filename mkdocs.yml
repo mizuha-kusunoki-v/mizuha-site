@@ -62,7 +62,7 @@ extra_javascript:
 extra:
   analytics:
     provider: google
-    property: G-XXXXXXXXXX  # TODO: Google Analytics 測定IDに差し替える
+    property: G-J9NGMEMPHV
   social:
     - icon: fontawesome/brands/youtube
       link: https://www.youtube.com/@楠木瑞羽
