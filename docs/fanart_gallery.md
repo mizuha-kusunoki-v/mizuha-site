@@ -26,16 +26,25 @@
 
 <div class="fanart-card">
   <a href="https://x.com/munouyaku_desu/status/2053807330819805495" target="_blank" rel="noopener">
-    <img src="img/fanart/001.png" alt="まおS様のファンアート">
+    <img src="img/fanart/001_1.jpg" alt="まおS様のファンアート">
   </a>
   <div class="fanart-meta">
-    <a href="https://x.com/munouyaku_desu" target="_blank" rel="noopener">@munouyaku_desu</a>
+    <span class="fanart-index">1/2</span><a href="https://x.com/munouyaku_desu" target="_blank" rel="noopener">@munouyaku_desu</a>
+  </div>
+</div>
+
+<div class="fanart-card">
+  <a href="https://x.com/munouyaku_desu/status/2053807330819805495" target="_blank" rel="noopener">
+    <img src="img/fanart/001_2.jpg" alt="まおS様のファンアート">
+  </a>
+  <div class="fanart-meta">
+    <span class="fanart-index">2/2</span><a href="https://x.com/munouyaku_desu" target="_blank" rel="noopener">@munouyaku_desu</a>
   </div>
 </div>
 
 <div class="fanart-card">
   <a href="https://x.com/tottchiki2619/status/2021417657078018169" target="_blank" rel="noopener">
-    <img src="img/fanart/002.png" alt="ピリリたん様のファンアート">
+    <img src="img/fanart/002.jpg" alt="ピリリたん様のファンアート">
   </a>
   <div class="fanart-meta">
     <a href="https://x.com/tottchiki2619" target="_blank" rel="noopener">@tottchiki2619</a>

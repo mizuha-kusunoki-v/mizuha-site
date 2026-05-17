@@ -8,12 +8,15 @@
   4. git add . && git commit && git push で公開
 
 CSV のフォーマット:
-  filename  : 画像ファイル名（例: 001.png）。未取得の場合は空欄でOK
-              複数枚の場合は count を指定し 001_1.png / 001_2.png ... と命名する
+  filename  : ファイルのベース名（例: 001）または拡張子付き（例: 001.png）
+              未取得の場合は空欄でOK
+              複数枚の場合は count を指定し 001_1 / 001_2 ... と自動展開される
   author    : 作者名（様 は自動付与）
   x_handle  : X の ID（@ なし）
   post_url  : 元ポストの URL
   count     : 画像の枚数（省略 or 1 = 1枚、2以上 = 複数枚）
+  ext       : 画像フォーマット（png / jpg / webp など、省略時は png）
+              filename に拡張子が含まれている場合はそちらが優先される
 """
 
 import csv
@@ -31,16 +34,32 @@ START_MARKER = "<!-- FANART_START -->"
 END_MARKER   = "<!-- FANART_END -->"
 
 
-def expand_filenames(filename: str, count: int) -> list[str]:
+def resolve_filename(filename: str, ext: str) -> str:
+    """filename と ext を組み合わせて完全なファイル名を返す。
+    - filename に拡張子あり → そのまま使用（ext は無視）
+    - filename に拡張子なし → filename.ext に結合
+    - filename が空 → 空文字を返す
+    """
+    if not filename:
+        return ""
+    p = Path(filename)
+    if p.suffix:          # 拡張子が既にある場合はそのまま
+        return filename
+    return f"{filename}.{ext.lstrip('.')}"
+
+
+def expand_filenames(filename: str, ext: str, count: int) -> list[str]:
     """count に応じてファイル名リストを生成する。
     count=1 → ["001.png"]
     count=3 → ["001_1.png", "001_2.png", "001_3.png"]
     """
-    if count <= 1:
-        return [filename] if filename else [""]
+    full = resolve_filename(filename, ext)
 
-    if filename:
-        p = Path(filename)
+    if count <= 1:
+        return [full] if full else [""]
+
+    if full:
+        p = Path(full)
         return [f"{p.stem}_{i}{p.suffix}" for i in range(1, count + 1)]
     else:
         return [""] * count
@@ -78,8 +97,9 @@ def generate_cards_for_entry(row: dict) -> list[str]:
     x_handle = row["x_handle"].strip()
     post_url = row["post_url"].strip()
     count    = int(row.get("count", "1").strip() or "1")
+    ext      = row.get("ext", "png").strip() or "png"
 
-    filenames = expand_filenames(filename, count)
+    filenames = expand_filenames(filename, ext, count)
     return [
         generate_card(fn, author, x_handle, post_url,
                       index=i + 1 if count > 1 else 0,
@@ -103,7 +123,24 @@ def main() -> None:
         print("⚠️  CSV にデータがありません。")
         return
 
-    # --- 既存の登録済み URL を取得 ---
+    # --- CSV 内の重複 URL を除外（先勝ち） ---
+    seen_urls    = set()
+    unique_entries  = []
+    dup_entries  = []
+    for row in entries:
+        url = row["post_url"].strip()
+        if url in seen_urls:
+            dup_entries.append(row)
+        else:
+            seen_urls.add(url)
+            unique_entries.append(row)
+
+    if dup_entries:
+        print(f"⏭️  CSV 内に重複 URL が {len(dup_entries)} 件あったためスキップ:")
+        for row in dup_entries:
+            print(f"      {row['author']}様 ({row['post_url']})")
+
+    # --- CSV 全件からギャラリーブロックを再生成 ---
     md = MD_FILE.read_text(encoding="utf-8")
 
     if START_MARKER not in md or END_MARKER not in md:
@@ -112,52 +149,24 @@ def main() -> None:
 
     start = md.index(START_MARKER) + len(START_MARKER)
     end   = md.index(END_MARKER)
-    existing_block = md[start:end]
 
-    registered_urls = {
-        line.split('href="')[1].split('"')[0]
-        for line in existing_block.splitlines()
-        if 'href="https://x.com/' in line and 'status/' in line
-    }
-
-    # --- 新規エントリのみフィルタ ---
-    new_entries  = []
-    skip_entries = []
-    for row in entries:
-        url = row["post_url"].strip()
-        if url in registered_urls:
-            skip_entries.append(row)
-        else:
-            new_entries.append(row)
-
-    if skip_entries:
-        print(f"⏭️  {len(skip_entries)} 件はすでに登録済みのためスキップ:")
-        for row in skip_entries:
-            count = int(row.get("count", "1").strip() or "1")
-            label = f"{count}枚" if count > 1 else "1枚"
-            print(f"      {row['author']}様 [{label}] ({row['post_url']})")
-
-    if not new_entries:
-        print("ℹ️  追加する新規エントリはありませんでした。")
-        return
-
-    # --- 新規カードを既存ブロックの末尾に追記 ---
     all_cards = []
-    for row in new_entries:
+    for row in unique_entries:
         all_cards.extend(generate_cards_for_entry(row))
 
-    new_block  = "\n\n".join(all_cards)
-    updated_block = existing_block.rstrip() + "\n\n" + new_block + "\n\n"
-    new_md = md[:start] + updated_block + md[end:]
+    new_block = "\n\n".join(all_cards)
+    new_md = md[:start] + "\n\n" + new_block + "\n\n" + md[end:]
     MD_FILE.write_text(new_md, encoding="utf-8")
 
-    total_cards = sum(int(r.get("count", "1").strip() or "1") for r in new_entries)
-    print(f"✅ {len(new_entries)} 件（計 {total_cards} 枚）を新たに追加しました。")
-    for i, row in enumerate(new_entries, 1):
-        count  = int(row.get("count", "1").strip() or "1")
+    total_cards = sum(
+        len(generate_cards_for_entry(r)) for r in unique_entries
+    )
+    print(f"✅ {len(unique_entries)} 件（計 {total_cards} 枚）でギャラリーを更新しました。")
+    for i, row in enumerate(unique_entries, 1):
+        count   = int(row.get("count", "1").strip() or "1")
         has_img = row["filename"].strip()
-        status = "🖼️ " if has_img else "⬜ (画像未設定)"
-        label  = f"{count}枚" if count > 1 else "1枚"
+        status  = "🖼️ " if has_img else "⬜ (画像未設定)"
+        label   = f"{count}枚" if count > 1 else "1枚"
         print(f"  {i:02d}. {status} {row['author']}様 [@{row['x_handle']}] {label}")
 
 
