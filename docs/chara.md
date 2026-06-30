@@ -43,15 +43,44 @@ Live2D モデルとポーズ違いの2枚。
 
 ---
 
-## 星の翼　─　ハルカ風コスプレ
+## 星の翼　─　ハルカ＆サタニア風コスプレ
 
-<div class="chara-single" markdown>
+『星の翼』というゲームにおける私の一番のメインキャラ、**ハルカ**（および**サタニア**）風のコスプレイラスト集。  
+初プレイのときからずっと共に戦い抜いてきた思い入れの深いキャラクターたち。
 
-![ハルカ風コスプレ](img/haruka.png){ .chara-img }
+### ハルカ
 
-『星の翼』初プレイのときからずっと共に戦い抜いてきた、ハルカ風の衣装。  
-アクションゲームということで「使用した」という表現が正しいかもしれないが、それだけ思い入れの深い一着。  
-現在、**強化形態**および**サタニア**風コスプレの差分も鋭意制作中。続報をお楽しみに！
+<div class="chara-grid" markdown>
+
+![ハルカ 通常時](img/haruka/normal.png){ .chara-img }
+
+![ハルカ 通常時（黄色目）](img/haruka/normal_yellow.png){ .chara-img }
+
+![ハルカ 強化時](img/haruka/powerup.png){ .chara-img }
+
+![ハルカ 強化時（黄色目）](img/haruka/powerup_yellow.png){ .chara-img }
+
+![ハルカ 覚醒技](img/haruka/awaken.png){ .chara-img }
+
+![ハルカ 覚醒技（黄色目）](img/haruka/awaken_yellow.png){ .chara-img }
+
+</div>
+
+### サタニア
+
+<div class="chara-grid" markdown>
+
+![サタニア 通常時](img/satania/normal.png){ .chara-img }
+
+![サタニア 通常時（黄色目）](img/satania/normal_yellow.png){ .chara-img }
+
+![サタニア 強化時](img/satania/powerup.png){ .chara-img }
+
+![サタニア 強化時（黄色目）](img/satania/powerup_yellow.png){ .chara-img }
+
+![サタニア 覚醒技](img/satania/awaken.png){ .chara-img }
+
+![サタニア 覚醒技（黄色目）](img/satania/awaken_yellow.png){ .chara-img }
 
 </div>
 
