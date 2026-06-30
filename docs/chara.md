@@ -53,21 +53,27 @@ Live2D モデルとポーズ違いの2枚。
 <div class="chara-grid" markdown>
 
 ![ハルカ 通常時](img/haruka/normal.png){ .chara-img }
+
 ![サタニア 通常時](img/satania/normal.png){ .chara-img }
 
 ![ハルカ 通常時（黄色目）](img/haruka/normal_yellow.png){ .chara-img }
+
 ![サタニア 通常時（黄色目）](img/satania/normal_yellow.png){ .chara-img }
 
 ![ハルカ 強化時](img/haruka/powerup.png){ .chara-img }
+
 ![サタニア 強化時](img/satania/powerup.png){ .chara-img }
 
 ![ハルカ 強化時（黄色目）](img/haruka/powerup_yellow.png){ .chara-img }
+
 ![サタニア 強化時（黄色目）](img/satania/powerup_yellow.png){ .chara-img }
 
 ![ハルカ 覚醒技](img/haruka/awaken.png){ .chara-img }
+
 ![サタニア 覚醒技](img/satania/awaken.png){ .chara-img }
 
 ![ハルカ 覚醒技（黄色目）](img/haruka/awaken_yellow.png){ .chara-img }
+
 ![サタニア 覚醒技（黄色目）](img/satania/awaken_yellow.png){ .chara-img }
 
 </div>
