@@ -3,6 +3,10 @@
 {% block extrahead %}
   {{ super() }}
 
+  {# ===== Google AdSense ===== #}
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1304234672734603"
+     crossorigin="anonymous"></script>
+
   {# ===== OGP / Twitter Card ===== #}
   {% set ogp_image = config.site_url ~ "img/blazer_b.png" %}
   {% set ogp_title = page.title ~ " | " ~ config.site_name if page.title else config.site_name %}
